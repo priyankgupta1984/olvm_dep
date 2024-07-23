@@ -1,0 +1,11 @@
+- block:
+  vars_files:
+    - password.yml
+
+  tasks:
+    - name: Obtain SSO token with using username/password credentials
+      ovirt_auth:
+        url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
+        username: admin@internal
+        ca_file: /tmp/ca.pem
+        password: "{{ olvm_password }}"
