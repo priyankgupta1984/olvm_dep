@@ -3,30 +3,35 @@
   become: yes
   become_method: sudo
   vars_files:
-    - password.yml
+    - password.yaml
 
   tasks:
     - name: Obtain SSO token with using username/password credentials
       ovirt_auth:
         url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
         username: admin@internal
-        ca_file: /tmp/ca.pem
+        ca_file: /etc/pki/ovirt-engine/ca.pem
         password: "{{ olvm_password }}"
     - name: Creating Dummy VM
       ovirt_vm:
+        auth: "{{ ovirt_auth }}"
         state: present
         cluster: Default
         name: dummy-vm
         memory: 2GiB
         cpu_cores: 4
-        operating_system: "Other OS"
-    - name: Add Disk
-      ovirt_disk:
-        name: myvm_disk
-        vm_name: summy-vm
-        size: 10GiB
-        format: cow
-        interface: virtio
-        storage_domain: data
-        bootable: True
-        sparse: True
+        operating_system: "Oracle Linux 8.x x64"
+        nics:
+          - name: ovirtmgmt
+            interface: virtio
+            profile_name: ovirtmgmt
+#    - name: Add Disk
+#      ovirt_disk:
+#        name: myvm_disk
+#        vm_name: dummy-vm
+#        size: 10GiB
+#        format: cow
+#        interface: virtio
+#        storage_domain: she-pr-store
+#        bootable: True
+#        sparse: True
