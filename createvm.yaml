@@ -1,4 +1,7 @@
-- block:
+---
+- hosts: olvm
+  become: yes
+  become_method: sudo
   vars_files:
     - password.yml
 
@@ -9,3 +12,21 @@
         username: admin@internal
         ca_file: /tmp/ca.pem
         password: "{{ olvm_password }}"
+    - name: Creating Dummy VM
+      ovirt_vm:
+        state: present
+        cluster: Default
+        name: dummy-vm
+        memory: 2GiB
+        cpu_cores: 4
+        operating_system: "Other OS"
+    - name: Add Disk
+      ovirt_disk:
+        name: myvm_disk
+        vm_name: summy-vm
+        size: 10GiB
+        format: cow
+        interface: virtio
+        storage_domain: data
+        bootable: True
+        sparse: True
