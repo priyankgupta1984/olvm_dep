@@ -25,13 +25,18 @@
           - name: ovirtmgmt
             interface: virtio
             profile_name: ovirtmgmt
-#    - name: Add Disk
-#      ovirt_disk:
-#        name: myvm_disk
-#        vm_name: dummy-vm
-#        size: 10GiB
-#        format: cow
-#        interface: virtio
-#        storage_domain: she-pr-store
-#        bootable: True
-#        sparse: True
+        cd_iso: OracleLinux-R8-U9-x86_64-dvd.iso
+        boot_devices:
+          - cdrom
+#  tasks:
+    - name: Add Disk
+      ovirt_disk:
+        auth: "{{ ovirt_auth }}"
+        name: myvm_disk
+        vm_name: dummy-vm
+        size: 10GiB
+        format: cow
+        interface: virtio
+        storage_domain: she-pr-store
+        bootable: True
+        sparse: True
