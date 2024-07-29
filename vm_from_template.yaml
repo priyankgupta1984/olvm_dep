@@ -14,7 +14,7 @@
       ovirt_vm:
         auth: "{{ ovirt_auth }}"
         cluster: "Default"
-        template: ol8-template-latest
+        template: OL8U10_x86_64-olvm-b237
         name: "olam_dep"
         state: running
         high_availability: yes
