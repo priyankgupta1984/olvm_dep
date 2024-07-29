@@ -8,7 +8,7 @@
       ovirt.ovirt.ovirt_auth:
         url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
         username: admin@internal
-        ca_file: /tmp/ca.pem
+        ca_file: /etc/pki/ovirt-engine/ca.pem
         password: "{{ olvm_password }}"
     - name: Creating Dummy VM
       ovirt_vm:
