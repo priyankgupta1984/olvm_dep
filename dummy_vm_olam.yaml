@@ -1,5 +1,6 @@
 ---
-- vars_files:
+- hosts: odscshe-pr.in.oracle.com
+  vars_files:
     - password.yaml
 
   tasks:
