@@ -34,7 +34,7 @@
 #             runcmd:
 #               - hostnamectl set-hostname olam_dep1.in.oracle.com
     - name: Add Nic
-      nic:
+      ovirt_nic:
         name: ovirtmgmt
         interface: virtio
         profile_name: ovirtmgmt
