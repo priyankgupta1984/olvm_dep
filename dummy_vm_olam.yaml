@@ -1,15 +1,12 @@
 ---
 - hosts: odscshe-pr.in.oracle.com
-  vars_files:
-    - password.yaml
-
   tasks:
     - name: Obtain SSO token with using username/password credentials
       ovirt.ovirt.ovirt_auth:
         url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
         username: admin@internal
         ca_file: /tmp/ca.pem
-        password: "{{ olvm_password }}"
+        password: monster
     - name: Creating Dummy VM
       ovirt_vm:
         auth: "{{ ovirt_auth }}"
