@@ -19,6 +19,13 @@
         state: running
         high_availability: yes
         cloud_init:
-           custom_script:
-             runcmd:
-               - hostnamectl set-hostname olam_dep.in.oracle.com
+           host_name: olam_depin.oracle.com
+           user_name: root
+           root_password: monster
+           nic_boot_protocol: dhcp
+           nic_on_boot: true
+        nics:
+          - name: ovirtmgmt
+            interface: virtio
+            profile_name: ovirtmgmt
+        memory: 2GiB
