@@ -31,8 +31,8 @@
              password: "{{ root_password }}"
              chpasswd: { expire: False }
              ssh_pwauth: True
-             runcmd:
-               - hostnamectl set-hostname olam_dep1.in.oracle.com
+#             runcmd:
+#               - hostnamectl set-hostname olam_dep1.in.oracle.com
     - name: Add Nic
       nic:
         name: ovirtmgmt
