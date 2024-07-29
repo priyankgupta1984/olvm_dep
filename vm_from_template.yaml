@@ -18,6 +18,7 @@
         name: "olam_dep1"
         state: running
         high_availability: yes
+        memory: 2GiB
         cloud_init:
            host_name: olam_dep1.in.oracle.com
            user_name: root
@@ -36,5 +37,4 @@
       nic:
         - name: ovirtmgmt
           interface: virtio
-            profile_name: ovirtmgmt
-        memory: 2GiB
+          profile_name: ovirtmgmt
