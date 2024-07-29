@@ -1,0 +1,40 @@
+---
+- name: Main Playbook
+  hosts: odscshe-pr.in.oracle.com
+  vars_files:
+    - password.yaml
+  tasks:
+    - name: Obtain SSO token with using username/password credentials
+      ovirt.ovirt.ovirt_auth:
+        url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
+        username: admin@internal
+        ca_file: /etc/pki/ovirt-engine/ca.pem
+        password: "{{ olvm_password }}"
+    - name: Creating Dummy VM
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        state: present
+        cluster: Default
+        name: dummy-vm
+        memory: 2GiB
+        cpu_cores: 4
+        operating_system: "Oracle Linux 8.x x64"
+        nics:
+          - name: ovirtmgmt
+            interface: virtio
+            profile_name: ovirtmgmt
+        cd_iso: OracleLinux-R8-U9-x86_64-dvd.iso
+        boot_devices:
+          - cdrom
+#  tasks:
+    - name: Add Disk
+      ovirt_disk:
+        auth: "{{ ovirt_auth }}"
+        name: myvm_disk
+        vm_name: dummy-vm
+        size: 10GiB
+        format: cow
+        interface: virtio
+        storage_domain: she-pr-store
+        bootable: True
+        sparse: True
