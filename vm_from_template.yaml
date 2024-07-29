@@ -19,4 +19,6 @@
         state: running
         high_availability: yes
         cloud_init:
-          host_name: olam_dep.in.oracle.com
+           custom_script:
+             runcmd:
+               - hostnamectl set-hostname olam_dep.in.oracle.com
