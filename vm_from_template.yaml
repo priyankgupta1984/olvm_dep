@@ -21,13 +21,15 @@
         cloud_init:
            host_name: olam_dep1.in.oracle.com
            user_name: root
-           password: "{{ root_password }}"
            nic_boot_protocol: dhcp
            nics:
              - name: eth0
                on_boot: true
                boot_protocol: dhcp
            custom_script: |
+             password: "{{ root_password }}"
+             chpasswd: { expire: False }
+             ssh_pwauth: True
              runcmd:
                - hostnamectl set-hostname olam_dep1.in.oracle.com
         nics:
