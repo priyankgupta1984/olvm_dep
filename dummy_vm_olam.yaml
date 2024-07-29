@@ -1,9 +1,9 @@
 ---
 - name: Main Playbook
   hosts: odscshe-pr.in.oracle.com
+  vars_files:
+    - password.yaml
   tasks:
-    - name: Include Password yaml
-      import_playbook: password.yaml
     - name: Obtain SSO token with using username/password credentials
       ovirt.ovirt.ovirt_auth:
         url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
