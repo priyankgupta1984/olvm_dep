@@ -1,8 +1,5 @@
 ---
-- hosts: olvm
-  become: yes
-  become_method: sudo
-  vars_files:
+- vars_files:
     - password.yaml
 
   tasks:
