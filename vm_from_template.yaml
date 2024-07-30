@@ -30,28 +30,6 @@
              runcmd:
                - hostnamectl set-hostname olam_dep1-run.in.oracle.com
                - touch /tmp/done
-    - name: Get VM details
-      ovirt.ovirt.ovirt_vm_info:
-        auth: "{{ ovirt_auth }}"
-        name: olam_dep1  # Replace with your VM name
-      register: vm_info
-    - name: Display attached NICs
-      debug:
-        msg: |
-          Attached NICs for VM "{{ vm_info.vm.name }}":
-          {% for nic in vm_info.vm.nics %}
-            - NIC Name: {{ nic.name }}
-              Network: {{ nic.network.name }}
-              Interface: {{ nic.interface }}
-          {% endfor %}           
-    - name: Remove all attached NICs from the VM
-      ovirt.ovirt.ovirt_nic:
-        auth: "{{ ovirt_auth }}"
-        state: absent
-        vm: olam_dep1  # Replace with your VM name
-      loop: "{{ vm_info.vm.nics }}"
-      loop_control:
-        label: "{{ item.name }}"
     - name: Add Nic
       ovirt_nic:
         auth: "{{ ovirt_auth }}"
@@ -61,8 +39,14 @@
         interface: virtio
         profile: ovirtmgmt
         network: ovirtmgmt
-    - name: Reboot the VM to apply network changes
-      ovirt_vm:
-        auth: "{{ ovirt_auth }}"
-        state: reboot
-        name: olam_dep1     
+    - ovirt.ovirt.ovirt_nic_info:
+        vm: centos7
+        name: e*
+      register: result
+    - ansible.builtin.debug:
+        msg: "{{ result.ovirt_nics }}"    
+#    - name: Reboot the VM to apply network changes
+#      ovirt_vm:
+#        auth: "{{ ovirt_auth }}"
+#        state: reboot
+#        name: olam_dep1     
