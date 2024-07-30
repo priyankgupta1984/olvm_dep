@@ -1,0 +1,65 @@
+---
+- name: Main Playbook
+  hosts: odscshe-pr.in.oracle.com
+  vars_files:
+    - password.yaml
+  tasks:
+    - name: Obtain SSO token with using username/password credentials
+      ovirt.ovirt.ovirt_auth:
+        url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
+        username: admin@internal
+        ca_file: /etc/pki/ovirt-engine/ca.pem
+        password: "{{ olvm_password }}"
+    - name: Create Virtual Machine from Template
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        cluster: "Default"
+        template: OL8U10_x86_64-olvm-b237
+        name: "olam_dep1"
+        state: stopped
+        high_availability: yes
+        memory: 2GiB
+        cloud_init:
+           host_name: olam_dep1.in.oracle.com
+           user_name: root
+           nic_boot_protocol: dhcp
+           custom_script: |
+             password: "{{ root_password }}"
+             chpasswd: { expire: False }
+             ssh_pwauth: True
+             runcmd:
+               - hostnamectl set-hostname olam_dep1-run.in.oracle.com
+               - touch /tmp/done
+    - name: Add Nic
+      ovirt_nic:
+        auth: "{{ ovirt_auth }}"
+        state: present
+        vm: olam_dep1
+        name: test
+        interface: virtio
+        profile: ovirtmgmt
+        network: ovirtmgmt      
+    - ovirt.ovirt.ovirt_nic_info:
+        auth: "{{ ovirt_auth }}"
+        vm: olam_dep1
+        name: n*
+      register: result
+    - ansible.builtin.debug:
+        msg: |
+          Attached NICs for VM:
+          {% for nic in result.ovirt_nics %}
+            - NIC Name: {{ nic.name }}
+          {% endfor %}
+    - name: Delete NICs matching pattern
+      ovirt.ovirt.ovirt_nic:
+        auth: "{{ ovirt_auth }}"
+        vm: olam_dep1
+        name: "{{ item.name }}"
+        state: absent
+      loop: "{{ result.ovirt_nics }}"
+      when: result.ovirt_nics is defined and result.ovirt_nics | length > 0
+    - name: Reboot the VM to apply network changes
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        state: running
+        name: olam_dep1
