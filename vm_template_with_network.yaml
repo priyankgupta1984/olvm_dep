@@ -39,14 +39,14 @@
       ovirt_nic:
         auth: "{{ ovirt_auth }}"
         state: present
-        vm: olam_dep1
+        vm: olam_dep_net
         name: test
         interface: virtio
         profile: ovirtmgmt
         network: ovirtmgmt      
     - ovirt.ovirt.ovirt_nic_info:
         auth: "{{ ovirt_auth }}"
-        vm: olam_dep1
+        vm: olam_dep_net
         name: n*
       register: result
     - ansible.builtin.debug:
@@ -58,7 +58,7 @@
     - name: Delete NICs matching pattern
       ovirt.ovirt.ovirt_nic:
         auth: "{{ ovirt_auth }}"
-        vm: olam_dep1
+        vm: olam_dep_net
         name: "{{ item.name }}"
         state: absent
       loop: "{{ result.ovirt_nics }}"
@@ -67,4 +67,4 @@
       ovirt_vm:
         auth: "{{ ovirt_auth }}"
         state: running
-        name: olam_dep1
+        name: olam_dep_net
