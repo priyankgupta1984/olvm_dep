@@ -36,6 +36,9 @@
     - name: Add Nic
       ovirt_nic:
         auth: "{{ ovirt_auth }}"
+        state: present
+        vm: olam_dep1
         name: ovirtmgmt
         interface: virtio
         profile_name: ovirtmgmt
+        network: ovirtmgmt
