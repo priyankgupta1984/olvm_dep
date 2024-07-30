@@ -48,5 +48,5 @@
     - name: Reboot the VM to apply network changes
       ovirt_vm:
         auth: "{{ ovirt_auth }}"
-        state: restarted
+        state: reboot
         name: olam_dep1     
