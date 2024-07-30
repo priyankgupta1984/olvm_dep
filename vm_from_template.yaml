@@ -16,7 +16,7 @@
         cluster: "Default"
         template: OL8U10_x86_64-olvm-b237
         name: "olam_dep1"
-        state: running
+        state: stopped
         high_availability: yes
         memory: 2GiB
         cloud_init:
@@ -58,9 +58,8 @@
         state: absent
       loop: "{{ result.ovirt_nics }}"
       when: result.ovirt_nics is defined and result.ovirt_nics | length > 0
-
-#    - name: Reboot the VM to apply network changes
-#      ovirt_vm:
-#        auth: "{{ ovirt_auth }}"
-#        state: reboot
-#        name: olam_dep1
+    - name: Reboot the VM to apply network changes
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        state: running
+        name: olam_dep1
