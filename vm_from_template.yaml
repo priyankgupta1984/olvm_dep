@@ -35,7 +35,7 @@
         auth: "{{ ovirt_auth }}"
         state: absent
         vm: olam_dep1
-      loop: "{{ query('ovirt_nic', auth=ovirt_auth, vm=olam_dep1) }}"
+      loop: "{{ query('ovirt.ovirt.ovirt_nics', auth=ovirt_auth, vm=olam_dep1) }}"
       loop_control:
         label: "{{ item.name }}"
     - name: Add Nic
