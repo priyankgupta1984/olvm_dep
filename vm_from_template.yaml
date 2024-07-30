@@ -30,9 +30,14 @@
              runcmd:
                - hostnamectl set-hostname olam_dep1-run.in.oracle.com
                - touch /tmp/done
-#        cloud_init_nics:
-#        - name: eth0
-#          nic_on_boot: yes   
+    - name: Remove all existing NICs from the VM
+      ovirt_nic:
+        auth: "{{ ovirt_auth }}"
+        state: absent
+        vm: olam_dep1
+      loop: "{{ query('ovirt_nics', auth=ovirt_auth, vm=olam_dep1) }}"
+      loop_control:
+        label: "{{ item.name }}"
     - name: Add Nic
       ovirt_nic:
         auth: "{{ ovirt_auth }}"
@@ -42,3 +47,8 @@
         interface: virtio
         profile: ovirtmgmt
         network: ovirtmgmt
+    - name: Reboot the VM to apply network changes
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        state: restarted
+        name: olam_dep1     
