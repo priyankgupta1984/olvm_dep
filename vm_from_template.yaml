@@ -47,11 +47,7 @@
     - ansible.builtin.debug:
 #        msg: "{{ result.ovirt_nics }}"
         msg: |
-          Attached NICs for VM "{{ vm_info.vm.name }}":
-          {% for nic in vm_info.vm.nics %}
-            - NIC Name: {{ nic.name }}
-              Network: {{ nic.network.name }}
-              Interface: {{ nic.interface }}
+          Attached NICs for VM:
           {% endfor %}
 #    - name: Reboot the VM to apply network changes
 #      ovirt_vm:
