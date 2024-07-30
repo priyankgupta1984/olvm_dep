@@ -40,7 +40,8 @@
         profile: ovirtmgmt
         network: ovirtmgmt
     - ovirt.ovirt.ovirt_nic_info:
-        vm: centos7
+        auth: "{{ ovirt_auth }}"
+        vm: olam_dep1
         name: e*
       register: result
     - ansible.builtin.debug:
