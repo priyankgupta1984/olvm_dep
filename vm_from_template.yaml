@@ -30,6 +30,15 @@
              runcmd:
                - hostnamectl set-hostname olam_dep1-run.in.oracle.com
                - touch /tmp/done
+    - name: Add Nic
+      ovirt_nic:
+        auth: "{{ ovirt_auth }}"
+        state: present
+        vm: olam_dep1
+        name: test
+        interface: virtio
+        profile: ovirtmgmt
+        network: ovirtmgmt      
     - ovirt.ovirt.ovirt_nic_info:
         auth: "{{ ovirt_auth }}"
         vm: olam_dep1
@@ -49,15 +58,7 @@
         state: absent
       loop: "{{ result.ovirt_nics }}"
       when: result.ovirt_nics is defined and result.ovirt_nics | length > 0
-    - name: Add Nic
-      ovirt_nic:
-        auth: "{{ ovirt_auth }}"
-        state: present
-        vm: olam_dep1
-        name: test
-        interface: virtio
-        profile: ovirtmgmt
-        network: ovirtmgmt      
+
 #    - name: Reboot the VM to apply network changes
 #      ovirt_vm:
 #        auth: "{{ ovirt_auth }}"
