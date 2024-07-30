@@ -23,14 +23,15 @@
            host_name: olam_dep1.in.oracle.com
            user_name: root
            nic_boot_protocol: dhcp
-        cloud_init_nics:
-           nic_on_boot: yes
            custom_script: |
              password: "{{ root_password }}"
              chpasswd: { expire: False }
              ssh_pwauth: True
 #             runcmd:
 #               - hostnamectl set-hostname olam_dep1.in.oracle.com
+        cloud_init_nics:
+        - name: eth0
+          nic_on_boot: yes   
     - name: Add Nic
       ovirt_nic:
         name: ovirtmgmt
