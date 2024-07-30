@@ -30,7 +30,7 @@
              runcmd:
                - hostnamectl set-hostname olam_dep1-run.in.oracle.com
                - touch /tmp/done
-      - ovirt.ovirt.ovirt_nic_info:
+    - ovirt.ovirt.ovirt_nic_info:
         auth: "{{ ovirt_auth }}"
         vm: olam_dep1
         name: n*
