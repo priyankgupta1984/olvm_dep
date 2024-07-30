@@ -40,5 +40,5 @@
         vm: olam_dep1
         name: ovirtmgmt
         interface: virtio
-        profile_name: ovirtmgmt
+        profile: ovirtmgmt
         network: ovirtmgmt
