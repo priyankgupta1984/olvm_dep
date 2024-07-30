@@ -30,12 +30,14 @@
              runcmd:
                - hostnamectl set-hostname olam_dep1-run.in.oracle.com
                - touch /tmp/done
-    - name: Remove all existing NICs from the VM
-      ovirt_nic:
+    - name: Remove all attached NICs from the VM
+      ovirt.ovirt.ovirt_nic:
         auth: "{{ ovirt_auth }}"
-        name: eth0
         state: absent
-        vm: olam_dep1
+        vm: olam_dep1  # Replace with your VM name
+      loop: "{{ vm_info.vm.nics }}"
+      loop_control:
+        label: "{{ item.name }}"
     - name: Add Nic
       ovirt_nic:
         auth: "{{ ovirt_auth }}"
