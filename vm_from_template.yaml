@@ -48,6 +48,9 @@
 #        msg: "{{ result.ovirt_nics }}"
         msg: |
           Attached NICs for VM:
+          {% for nic in result.ovirt_nics %}
+            - NIC Name: {{ nic.name }}
+          {% endfor %}
 #    - name: Reboot the VM to apply network changes
 #      ovirt_vm:
 #        auth: "{{ ovirt_auth }}"
