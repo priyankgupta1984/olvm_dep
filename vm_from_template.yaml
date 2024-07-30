@@ -35,14 +35,14 @@
         auth: "{{ ovirt_auth }}"
         state: present
         vm: olam_dep1
-        name: ovirtmgmt
+        name: test
         interface: virtio
         profile: ovirtmgmt
         network: ovirtmgmt
     - ovirt.ovirt.ovirt_nic_info:
         auth: "{{ ovirt_auth }}"
         vm: olam_dep1
-        name: e*
+        name: n*
       register: result
     - ansible.builtin.debug:
         msg: "{{ result.ovirt_nics }}"    
