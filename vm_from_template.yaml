@@ -27,13 +27,15 @@
              password: "{{ root_password }}"
              chpasswd: { expire: False }
              ssh_pwauth: True
-#             runcmd:
-#               - hostnamectl set-hostname olam_dep1.in.oracle.com
+             runcmd:
+               - hostnamectl set-hostname olam_dep1-run.in.oracle.com
+               - touch /tmp/done
         cloud_init_nics:
         - name: eth0
           nic_on_boot: yes   
     - name: Add Nic
       ovirt_nic:
+        auth: "{{ ovirt_auth }}"
         name: ovirtmgmt
         interface: virtio
         profile_name: ovirtmgmt
