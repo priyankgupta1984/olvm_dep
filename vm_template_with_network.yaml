@@ -35,36 +35,36 @@
              runcmd:
                - hostnamectl set-hostname olam_dep_net.in.oracle.com
                - touch /tmp/done
-    - name: Add Nic
-      ovirt_nic:
-        auth: "{{ ovirt_auth }}"
-        state: present
-        vm: olam_dep_net
-        name: test
-        interface: virtio
-        profile: ovirtmgmt
-        network: ovirtmgmt      
-    - ovirt.ovirt.ovirt_nic_info:
-        auth: "{{ ovirt_auth }}"
-        vm: olam_dep_net
-        name: n*
-      register: result
-    - ansible.builtin.debug:
-        msg: |
-          Attached NICs for VM:
-          {% for nic in result.ovirt_nics %}
-            - NIC Name: {{ nic.name }}
-          {% endfor %}
-    - name: Delete NICs matching pattern
-      ovirt.ovirt.ovirt_nic:
-        auth: "{{ ovirt_auth }}"
-        vm: olam_dep_net
-        name: "{{ item.name }}"
-        state: absent
-      loop: "{{ result.ovirt_nics }}"
-      when: result.ovirt_nics is defined and result.ovirt_nics | length > 0
-    - name: Reboot the VM to apply network changes
-      ovirt_vm:
-        auth: "{{ ovirt_auth }}"
-        state: running
-        name: olam_dep_net
+#    - name: Add Nic
+#      ovirt_nic:
+#        auth: "{{ ovirt_auth }}"
+#        state: present
+#        vm: olam_dep_net
+#        name: test
+#        interface: virtio
+#        profile: ovirtmgmt
+#        network: ovirtmgmt      
+#    - ovirt.ovirt.ovirt_nic_info:
+#        auth: "{{ ovirt_auth }}"
+#        vm: olam_dep_net
+#        name: n*
+#      register: result
+#    - ansible.builtin.debug:
+#        msg: |
+#          Attached NICs for VM:
+#          {% for nic in result.ovirt_nics %}
+#            - NIC Name: {{ nic.name }}
+#          {% endfor %}
+#    - name: Delete NICs matching pattern
+#      ovirt.ovirt.ovirt_nic:
+#        auth: "{{ ovirt_auth }}"
+#        vm: olam_dep_net
+#        name: "{{ item.name }}"
+#        state: absent
+#      loop: "{{ result.ovirt_nics }}"
+#      when: result.ovirt_nics is defined and result.ovirt_nics | length > 0
+#    - name: Reboot the VM to apply network changes
+#      ovirt_vm:
+#        auth: "{{ ovirt_auth }}"
+#        state: running
+#        name: olam_dep_net
