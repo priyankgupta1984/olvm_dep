@@ -29,14 +29,6 @@
              runcmd:
                - hostnamectl set-hostname olam_dep_net.in.oracle.com
                - touch /tmp/done
-        cloud_init_nics:
-        -  nic_name: eth0 
-           nic_boot_protocol: static
-           nic_ip_address: 10.178.73.6
-           nic_netmask: 255.255.252.0
-           nic_gateway: 10.178.72.1
-           dns_servers: 206.223.27.1
-           nic_on_boot: yes
 
 #    - name: Add Nic
 #      ovirt_nic:
