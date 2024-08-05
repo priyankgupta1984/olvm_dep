@@ -30,11 +30,11 @@
             runcmd:
               - hostnamectl set-hostname olam_dep1-run.in.oracle.com
               - touch /tmp/done
-    - name: Stop the VM to apply network changes
-      ovirt_vm:
-        auth: "{{ ovirt_auth }}"
-        state: stopped
-        name: olam_dep1           
+#    - name: Stop the VM to apply network changes
+#      ovirt_vm:
+#        auth: "{{ ovirt_auth }}"
+#        state: stopped
+#        name: olam_dep1           
     - name: Add Nic
       ovirt_nic:
         auth: "{{ ovirt_auth }}"
@@ -55,16 +55,16 @@
           {% for nic in result.ovirt_nics %}
             - NIC Name: {{ nic.name }}
           {% endfor %}
-    - name: Delete NICs matching pattern
-      ovirt.ovirt.ovirt_nic:
-        auth: "{{ ovirt_auth }}"
-        vm: olam_dep1
-        name: "{{ item.name }}"
-        state: absent
-      loop: "{{ result.ovirt_nics }}"
-      when: result.ovirt_nics is defined and result.ovirt_nics | length > 0
-    - name: Reboot the VM to apply network changes
-      ovirt_vm:
-        auth: "{{ ovirt_auth }}"
-        state: running
-        name: olam_dep1
+#    - name: Delete NICs matching pattern
+#      ovirt.ovirt.ovirt_nic:
+#        auth: "{{ ovirt_auth }}"
+#        vm: olam_dep1
+#        name: "{{ item.name }}"
+#        state: absent
+#      loop: "{{ result.ovirt_nics }}"
+#      when: result.ovirt_nics is defined and result.ovirt_nics | length > 0
+#    - name: Reboot the VM to apply network changes
+#      ovirt_vm:
+#        auth: "{{ ovirt_auth }}"
+#        state: running
+#        name: olam_dep1
