@@ -40,17 +40,16 @@
              runcmd:
                #- hostnamectl set-hostname olam_dep_net.in.oracle.com
                - touch /tmp/done
-           network_config:
-            - type: ethernet
-              name: eth0
-              mac_address: "00:16:3e:77:e2:d0"
-              subnets:
-                - type: static
-                  address: 10.178.73.6
-                  netmask: 255.255.252.0
-                  gateway: 10.178.72.1
-                  dns_servers: 206.223.27.1
-              on_boot: true
+             write_files:
+               - path: /etc/sysconfig/network-scripts/ifcfg-eth0
+                 content: |
+                   DEVICE=eth0
+                   BOOTPROTO=static
+                   ONBOOT=yes
+                   IPADDR=10.178.73.6
+                   NETMASK=255.255.252.0
+                   GATEWAY=10.178.72.1
+                   DNS1=206.223.27.1
 
 #    - name: Add Nic
 #      ovirt_nic:
