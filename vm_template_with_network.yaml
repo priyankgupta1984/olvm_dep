@@ -20,6 +20,11 @@
         high_availability: yes
         memory: 2GiB
         cloud_init:
+           nic_boot_protocol: static
+           nic_gateway: 10.178.72.1
+           nic_ip_address: 10.178.73.6
+           nic_netmask: 255.255.252.0
+           dns_servers: 206.223.27.1
            host_name: olam_dep_net.in.oracle.com
            user_name: root
            custom_script: |
