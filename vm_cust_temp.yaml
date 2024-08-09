@@ -14,7 +14,7 @@
       ovirt_vm:
         auth: "{{ ovirt_auth }}"
         cluster: "Default"
-        template: OL8U10_x86_64-olvm-b237
+        template: ol8-template-latest
         name: "olam_dep1"
         state: running
         high_availability: yes
@@ -35,26 +35,26 @@
 #        auth: "{{ ovirt_auth }}"
 #        state: stopped
 #        name: olam_dep1           
-    - name: Add Nic
-      ovirt_nic:
-        auth: "{{ ovirt_auth }}"
-        state: present
-        vm: olam_dep1
-        name: test
-        interface: virtio
-        profile: ovirtmgmt
-        network: ovirtmgmt      
-    - ovirt.ovirt.ovirt_nic_info:
-        auth: "{{ ovirt_auth }}"
-        vm: olam_dep1
-        name: n*
-      register: result
-    - ansible.builtin.debug:
-        msg: |
-          Attached NICs for VM:
-          {% for nic in result.ovirt_nics %}
-            - NIC Name: {{ nic.name }}
-          {% endfor %}
+#    - name: Add Nic
+#      ovirt_nic:
+#        auth: "{{ ovirt_auth }}"
+#        state: present
+#        vm: olam_dep1
+#        name: test
+#        interface: virtio
+#        profile: ovirtmgmt
+#        network: ovirtmgmt      
+#    - ovirt.ovirt.ovirt_nic_info:
+#        auth: "{{ ovirt_auth }}"
+#        vm: olam_dep1
+#        name: n*
+#      register: result
+#    - ansible.builtin.debug:
+#        msg: |
+#          Attached NICs for VM:
+#          {% for nic in result.ovirt_nics %}
+#            - NIC Name: {{ nic.name }}
+#          {% endfor %}
 #    - name: Delete NICs matching pattern
 #      ovirt.ovirt.ovirt_nic:
 #        auth: "{{ ovirt_auth }}"
