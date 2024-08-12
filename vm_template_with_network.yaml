@@ -20,14 +20,15 @@
         high_availability: yes
         memory: 2GiB
         cloud_init:
-           nic_boot_protocol: static
-           nic_gateway: 10.178.72.1
-           nic_ip_address: 10.178.73.6
-           nic_netmask: 255.255.252.0
-           dns_servers: 206.223.27.1
-           nic_name: enp1s0
            host_name: olam_dep_net_test.in.oracle.com
            user_name: root
+           dns_servers: 206.223.27.1
+           nic_name: enp1s0
+           nic_on_boot: true
+           nic_boot_protocol: static
+           nic_ip_address: 10.178.73.6
+           nic_gateway: 10.178.72.1
+           nic_netmask: 255.255.252.0  
            custom_script: |
              password: "{{ root_password }}"
              chpasswd: { expire: False }
