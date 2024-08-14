@@ -42,11 +42,16 @@
         name: nic1
         profile: ovirtmgmt
         network: ovirtmgmt
-    - name: Restart VM
+    - name: Poweroff VM
       ovirt_vm:
         auth: "{{ ovirt_auth }}"
         name: "olam_dep_net"
-        state: next_run
+        state: stopped
+    - name: Start VM
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        name: "olam_dep_net"
+        state: running
     - name: Cleanup OLVM auth token
       ovirt_auth:
         ovirt_auth: "{{ ovirt_auth }}"
