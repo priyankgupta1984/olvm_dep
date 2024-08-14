@@ -19,6 +19,10 @@
         state: running
         high_availability: yes
         memory: 2GiB
+        nics:
+          name: nic1
+          interface: virtio
+          profile_name: ovirtmgmt
         cloud_init:
            host_name: olam_dep_net_test.in.oracle.com
            user_name: root
@@ -34,7 +38,7 @@
              ssh_pwauth: True
              runcmd:
                - hostnamectl set-hostname olam_dep_net.in.oracle.com
-               - touch /tmp/done
+               - touch /tmp/done           
     - name: Cleanup OLVM auth token
       ovirt_auth:
         ovirt_auth: "{{ ovirt_auth }}"
