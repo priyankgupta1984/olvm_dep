@@ -33,7 +33,7 @@
              chpasswd: { expire: False }
              ssh_pwauth: True
              runcmd:
-               - hostnamectl set-hostname olam_dep_net.in.oracle.com
+#               - hostnamectl set-hostname olam_dep_net.in.oracle.com
                - touch /tmp/done           
     - name: Attach Network Profile
       ovirt_nic:
