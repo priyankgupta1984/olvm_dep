@@ -19,10 +19,9 @@
         state: running
         high_availability: yes
         memory: 2GiB
-        nics:
-          - interface: virtio
-            name: nic1
-            profile_name: ovirtmgmt
+        vnic_profile_mappings:
+          - source_network_name: ovirtmgmt
+            source_profile_name: ovirtmgmt
         cloud_init:
            host_name: olam_dep_net_test.in.oracle.com
            user_name: root
