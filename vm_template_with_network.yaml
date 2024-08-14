@@ -16,7 +16,7 @@
         cluster: "Default"
         template: OL8U10_x86_64-olvm-b237
         name: "olam_dep_net"
-        state: next_run
+        state: present
         high_availability: yes
         memory: 2GiB
         cloud_init:
