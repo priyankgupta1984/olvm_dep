@@ -20,9 +20,9 @@
         high_availability: yes
         memory: 2GiB
         nics:
-          name: nic1
-          interface: virtio
-          profile_name: ovirtmgmt
+          - name: nic1
+            interface: virtio
+            profile_name: ovirtmgmt
         cloud_init:
            host_name: olam_dep_net_test.in.oracle.com
            user_name: root
