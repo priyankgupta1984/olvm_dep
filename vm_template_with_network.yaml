@@ -16,7 +16,7 @@
         cluster: "Default"
         template: OL8U10_x86_64-olvm-b237
         name: "olam_dep_net"
-        state: present
+        state: running
         high_availability: yes
         memory: 2GiB
         cloud_init:
@@ -42,6 +42,11 @@
         name: nic1
         profile: ovirtmgmt
         network: ovirtmgmt
+    - name: Restart VM
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        name: "olam_dep_net"
+        state: next_run
     - name: Cleanup OLVM auth token
       ovirt_auth:
         ovirt_auth: "{{ ovirt_auth }}"
