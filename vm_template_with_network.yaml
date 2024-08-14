@@ -40,12 +40,13 @@
                - touch /tmp/done           
     - name: Attach Network Profile
       ovirt_nic:
+        auth: "{{ ovirt_auth }}"
         name: nic1
         network: ovirtmgmt
         profile: ovirtmgmt
     - name: Cleanup OLVM auth token
       ovirt_auth:
-        ovirt_auth: "{{ ovirt_auth }}"
+        auth: "{{ ovirt_auth }}"
         state: absent           
 # Half Backed             write_files:
 #               - path: /etc/sysconfig/network-scripts/ifcfg-eth0
