@@ -23,7 +23,7 @@
            host_name: olam_dep_net_test.in.oracle.com
            user_name: root
            dns_servers: 206.223.27.1
-           nic_name: 'System eth0'
+#           nic_name: eth0
            nic_boot_protocol: static
            nic_ip_address: 10.178.73.6
            nic_gateway: 10.178.72.1
