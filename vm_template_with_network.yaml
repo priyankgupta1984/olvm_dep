@@ -41,9 +41,10 @@
     - name: Attach Network Profile
       ovirt_nic:
         auth: "{{ ovirt_auth }}"
+        vm: olam_dep_net
         name: nic1
-        network: ovirtmgmt
         profile: ovirtmgmt
+        network: ovirtmgmt
     - name: Cleanup OLVM auth token
       ovirt_auth:
         auth: "{{ ovirt_auth }}"
