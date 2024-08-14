@@ -19,6 +19,7 @@
         state: running
         high_availability: yes
         memory: 2GiB
+        stateless: no
         cloud_init:
            host_name: olam_dep_net_test.in.oracle.com
            user_name: root
