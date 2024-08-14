@@ -19,9 +19,6 @@
         state: running
         high_availability: yes
         memory: 2GiB
-#        vnic_profile_mappings:
-#          - source_network_name: ovirtmgmt
-#            source_profile_name: ovirtmgmt
         cloud_init:
            host_name: olam_dep_net_test.in.oracle.com
            user_name: root
@@ -47,49 +44,5 @@
         network: ovirtmgmt
     - name: Cleanup OLVM auth token
       ovirt_auth:
-        auth: "{{ ovirt_auth }}"
-        state: absent           
-# Half Backed             write_files:
-#               - path: /etc/sysconfig/network-scripts/ifcfg-eth0
-#                 content: |
-#                   DEVICE=eth0
-#                   BOOTPROTO=static
-#                   ONBOOT=yes
-#                   IPADDR=10.178.73.6
-#                   NETMASK=255.255.252.0
-#                   GATEWAY=10.178.72.1
-#                   DNS1=206.223.27.1
-
-#    - name: Add Nic
-#      ovirt_nic:
-#        auth: "{{ ovirt_auth }}"
-#        state: present
-#        vm: olam_dep_net
-#        name: test
-#        interface: virtio
-#        profile: ovirtmgmt
-#        network: ovirtmgmt      
-#    - ovirt.ovirt.ovirt_nic_info:
-#        auth: "{{ ovirt_auth }}"
-#        vm: olam_dep_net
-#        name: n*
-#      register: result
-#    - ansible.builtin.debug:
-#        msg: |
-#          Attached NICs for VM:
-#          {% for nic in result.ovirt_nics %}
-#            - NIC Name: {{ nic.name }}
-#          {% endfor %}
-#    - name: Delete NICs matching pattern
-#      ovirt.ovirt.ovirt_nic:
-#        auth: "{{ ovirt_auth }}"
-#        vm: olam_dep_net
-#        name: "{{ item.name }}"
-#        state: absent
-#      loop: "{{ result.ovirt_nics }}"
-#      when: result.ovirt_nics is defined and result.ovirt_nics | length > 0
-#    - name: Reboot the VM to apply network changes
-#      ovirt_vm:
-#        auth: "{{ ovirt_auth }}"
-#        state: running
-#        name: olam_dep_net
+        ovirt_auth: "{{ ovirt_auth }}"
+        state: absent
