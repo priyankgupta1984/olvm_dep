@@ -14,10 +14,10 @@
       ovirt_network:
         name: net_ansible
         state: present
+        comment: network created through Ansible
+        datacenter: Dafault
+        vm_network: yes
         - cluster:
             - name: Default
               assigned: yes
               required: yes
-        comment: network created through Ansible
-        datacenter: Dafault
-        vm_network: yes
