@@ -15,9 +15,9 @@
         name: net_ansible
         state: present
         comment: network created through Ansible
-        datacenter: Dafault
+        datacenter: Default
         vm_network: yes
-        - clusters:
-            - name: Default
-              assigned: yes
-              required: yes
+        clusters:
+          name: Default
+          assigned: yes
+          required: yes
