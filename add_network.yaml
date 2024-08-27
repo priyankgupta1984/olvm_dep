@@ -12,10 +12,11 @@
         password: "{{ olvm_password }}"
     - name: Create Virtual Network
       ovirt_network:
+        auth: "{{ ovirt_auth }}"        
         name: net_ansible
         state: present
         comment: network created through Ansible
-        datacenter: Default
+        data_center: Default
         vm_network: yes
         clusters:
           name: Default
