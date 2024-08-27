@@ -1,0 +1,21 @@
+---
+- name: Main Playbook
+  hosts: odscshe-pr.in.oracle.com
+  vars_files:
+    - password.yaml
+  tasks:
+    - name: Obtain SSO token with using username/password credentials
+      ovirt_auth:
+        url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
+        username: admin@internal
+        ca_file: /etc/pki/ovirt-engine/ca.pem
+        password: "{{ olvm_password }}"
+    - name: Create Virtual disk
+      ovirt_disk:
+        auth: "{{ ovirt_auth }}"
+        name: data_disk
+        state: present
+        size: 1GiB
+        sparse: yes
+        storage_domain: 
+        
