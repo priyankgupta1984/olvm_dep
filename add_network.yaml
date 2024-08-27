@@ -17,7 +17,7 @@
         comment: network created through Ansible
         datacenter: Dafault
         vm_network: yes
-        - cluster:
+        - clusters:
             - name: Default
               assigned: yes
               required: yes
