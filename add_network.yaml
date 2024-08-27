@@ -19,6 +19,6 @@
         data_center: Default
         vm_network: yes
         clusters:
-          name: Default
-          assigned: yes
-          required: yes
+          - name: Default
+            assigned: yes
+            required: yes
