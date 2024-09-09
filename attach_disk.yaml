@@ -14,11 +14,12 @@
       ovirt_disk:
         auth: "{{ ovirt_auth }}"
         name: data_disk_olam_dep
-        state: present
+        state: attached
         size: 1GiB
         sparse: yes
         storage_domain: she-pr-store
         content_type: data
         description: Disk created through playbook
+        vm_name: osmh-ravi
         
         
