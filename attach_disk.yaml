@@ -22,5 +22,8 @@
         content_type: data
         description: Disk created through playbook
         vm_name: osmh-ravi
-        
+    - name: Cleanup OLVM auth token
+      ovirt_auth:
+        ovirt_auth: "{{ ovirt_auth }}"
+        state: absent        
         
