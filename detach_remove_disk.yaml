@@ -21,3 +21,7 @@
         auth: "{{ ovirt_auth }}"
         name: data_disk_olam_dep
         state: absent
+    - name: Cleanup OLVM auth token
+      ovirt_auth:
+        ovirt_auth: "{{ ovirt_auth }}"
+        state: absent
