@@ -22,7 +22,6 @@
           - name: Default
             assigned: yes
             required: yes
-
     - name: Cleanup OLVM auth token
       ovirt_auth:
         ovirt_auth: "{{ ovirt_auth }}"
