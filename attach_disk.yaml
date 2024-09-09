@@ -13,9 +13,12 @@
     - name: Create Virtual disk
       ovirt_disk:
         auth: "{{ ovirt_auth }}"
-        name: data_disk
+        name: data_disk_olam_dep
         state: present
         size: 1GiB
         sparse: yes
-        storage_domain: 
+        storage_domain: she-pr-store
+        content_type: data
+        description: Disk created through playbook
+        
         
