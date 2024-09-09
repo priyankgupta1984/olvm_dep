@@ -17,6 +17,7 @@
         state: attached
         size: 1GiB
         sparse: yes
+        interface: virtio
         storage_domain: she-pr-store
         content_type: data
         description: Disk created through playbook
