@@ -10,8 +10,14 @@
         username: admin@internal
         ca_file: /etc/pki/ovirt-engine/ca.pem
         password: "{{ olvm_password }}"
-    - name: Create Virtual disk
+    - name: Detach Virtual disk from VM
       ovirt_disk:
         auth: "{{ ovirt_auth }}"
         name: data_disk_olam_dep
-        state: attached
+        state: detached
+        vm_name: osmh-ravi
+    - name: Delete Virtual disk
+      ovirt_disk:
+        auth: "{{ ovirt_auth }}"
+        name: data_disk_olam_dep
+        state: absent
