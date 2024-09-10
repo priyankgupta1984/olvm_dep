@@ -1,6 +1,10 @@
 ---
 vms_list:
-  - pg-ocne-master
-  - pg-ocne-worker1
-  - pg-ocne-worker2
-  - pg-ocne-worker3
+  - name: pg-ocne-master
+    hostname: pg-ocne-master
+  - name: pg-ocne-worker1
+    hostname: pg-ocne-worker1
+  - name: pg-ocne-worker2
+    hostname: pg-ocne-worker2
+  - name: pg-ocne-worker3
+    hostname: pg-ocne-worker3
