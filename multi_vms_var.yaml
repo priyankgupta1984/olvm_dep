@@ -44,8 +44,8 @@
         name: nic1
         profile: ovirtmgmt
         network: ovirtmgmt
-  loop: "{{ vms_list }}"         
     - name: Cleanup OLVM auth token
       ovirt_auth:
         ovirt_auth: "{{ ovirt_auth }}"
         state: absent
+  loop: "{{ vms_list }}"
