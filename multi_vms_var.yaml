@@ -37,7 +37,6 @@
 #             runcmd:
 #               - hostnamectl set-hostname olam_dep_net.in.oracle.com
 #               - touch /tmp/done
-
     - name: Attach Network Profile
       ovirt_nic:
         auth: "{{ ovirt_auth }}"
