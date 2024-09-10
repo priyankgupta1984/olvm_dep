@@ -2,9 +2,13 @@
 vms_list:
   - name: pg-ocne-master
     hostname: pg-ocne-master
+    ip_add: 10.178.73.61
   - name: pg-ocne-worker1
     hostname: pg-ocne-worker1
+    ip_add: 10.178.73.62
   - name: pg-ocne-worker2
     hostname: pg-ocne-worker2
+    ip_add: 10.178.73.63
   - name: pg-ocne-worker3
     hostname: pg-ocne-worker3
+    ip_add: 10.178.73.64
