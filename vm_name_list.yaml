@@ -14,5 +14,5 @@ vms_list:
     ip_add: 10.178.73.64
 net_info:
   - gateway: 10.178.72.1
-  - dns_name: 206.223.27.1
+  - dname: 206.223.27.1
   - subnet: 255.255.252.0
