@@ -16,7 +16,7 @@
         auth: "{{ ovirt_auth }}"
         cluster: "Default"
         template: OL8U10_x86_64-olvm-b237
-        name: "{{ item }}"
+        name: "{{ item.name }}"
         state: running
         high_availability: yes
         memory: 2GiB
@@ -37,7 +37,7 @@
 #             runcmd:
 #               - hostnamectl set-hostname olam_dep_net.in.oracle.com
 #               - touch /tmp/done
-      
+      loop: "{{ vms_list }}"
     - name: Attach Network Profile
       ovirt_nic:
         auth: "{{ ovirt_auth }}"
@@ -49,4 +49,4 @@
       ovirt_auth:
         ovirt_auth: "{{ ovirt_auth }}"
         state: absent
-loop: "{{ vms_list }}"
+
