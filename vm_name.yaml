@@ -1,0 +1,6 @@
+---
+vms_list:
+  - pg-ocne-master
+  - pg-ocne-worker1
+  - pg-ocne-worker2
+  - pg-ocne-worker3
