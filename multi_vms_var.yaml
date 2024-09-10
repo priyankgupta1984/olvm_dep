@@ -34,8 +34,8 @@
              password: "{{ root_password }}"
              chpasswd: { expire: False }
              ssh_pwauth: True
-#             runcmd:
-#               - hostnamectl set-hostname olam_dep_net.in.oracle.com
+             runcmd:
+               - hostnamectl set-hostname "{{ item.name }}"
 #               - touch /tmp/done
       loop: "{{ vms_list }}"      
     - name: Attach Network Profile
