@@ -41,7 +41,7 @@
     - name: Attach Network Profile
       ovirt_nic:
         auth: "{{ ovirt_auth }}"
-        vm: olam_dep_net
+        vm: "{{ item.name }}"
         name: nic1
         profile: ovirtmgmt
         network: ovirtmgmt
