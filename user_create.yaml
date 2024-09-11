@@ -15,6 +15,5 @@
       ovirt_user:
         auth: "{{ ovirt_auth }}"
         name: play_user
-        password: monster
         domain: internal-authz
         state: present
