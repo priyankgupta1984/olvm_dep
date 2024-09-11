@@ -31,7 +31,7 @@
         auth: "{{ ovirt_auth }}"
         user_name: play_user
         authz_name: internal-authz
-        role: AuditLogManager
+        role: UserRole
         object_name: Default
         object_type: data_center
     - name: Assign Role
