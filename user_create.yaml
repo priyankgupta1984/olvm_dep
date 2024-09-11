@@ -1,16 +1,26 @@
 ---
-- name: Main Playbook
+- name: User Creation
   hosts: 10.178.73.46
-  vars_files:
-    - password.yaml
   tasks:
-#    - name: Obtain SSO token with using username/password credentials
-#      ovirt.ovirt.ovirt_auth:
-#        url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
-#        username: admin@internal
-#        ca_file: /etc/pki/ovirt-engine/ca.pem
-#        password: "{{ olvm_password }}"
     - name: Create User in internal-authz
       shell: ovirt-aaa-jdbc-tool user add play_user --attribute=firstName=playbook --attribute=lastName=user
     - name: Reset Password
       shell: ovirt-aaa-jdbc-tool user password-reset play_user --password=pass:{{ root_password }}
+
+- name: Add Users & Roles
+  hosts: odscshe-pr.in.oracle.com
+  vars_files:
+    - password.yaml
+  tasks:
+    - name: Obtain SSO token with using username/password credentials
+      ovirt.ovirt.ovirt_auth:
+        url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
+        username: admin@internal
+        ca_file: /etc/pki/ovirt-engine/ca.pem
+        password: "{{ olvm_password }}"
+    - name: Add user
+      ovirt_user:
+        auth: "{{ ovirt_auth }}"
+        name: play_user
+        state: present
+        domain: internal-authz
