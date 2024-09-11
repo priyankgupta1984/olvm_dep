@@ -13,6 +13,6 @@ vms_list:
     hostname: pg-ocne-worker3
     ip_add: 10.178.73.64
 net_detail:
-  - gateway: 10.178.72.1
-  - dname: 206.223.27.1
-  - subnet: 255.255.252.0
+  gateway: 10.178.72.1
+  dname: 206.223.27.1
+  subnet: 255.255.252.0
