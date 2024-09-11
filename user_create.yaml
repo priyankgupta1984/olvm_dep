@@ -34,3 +34,7 @@
         role:
           - UserRole
           - AuditLogManager
+    - name: Cleanup OLVM auth token
+      ovirt_auth:
+        ovirt_auth: "{{ ovirt_auth }}"
+        state: absent
