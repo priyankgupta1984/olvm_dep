@@ -3,7 +3,6 @@
   hosts: odscshe-pr.in.oracle.com
   vars_files:
     - password.yaml
-    - vm_name_list.yaml
   tasks:
     - name: Obtain SSO token with using username/password credentials
       ovirt.ovirt.ovirt_auth:
@@ -11,9 +10,7 @@
         username: admin@internal
         ca_file: /etc/pki/ovirt-engine/ca.pem
         password: "{{ olvm_password }}"
-    - name: Create Virtual Machine from Template
-      ovirt_user:
-        auth: "{{ ovirt_auth }}"
-        name: play_user
-        domain: internal-authz
-        state: present
+    - name: Create User in internal-authz
+      shell:
+        - ovirt-aaa-jdbc-tool user add play_user --attribute=firstName=playbook --attribute=lastName=user
+        - ovirt-aaa-jdbc-tool user password-reset play_user --password={{ root_password }}
