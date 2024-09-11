@@ -35,7 +35,7 @@
           - UserRole
           - AuditLogManager
         object_name: Default
-        object_type: datacenter
+        object_type: data_center
     - name: Cleanup OLVM auth token
       ovirt_auth:
         ovirt_auth: "{{ ovirt_auth }}"
