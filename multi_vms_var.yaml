@@ -24,12 +24,12 @@
         cloud_init:
            host_name: "{{ item.hostname }}"
            user_name: root
-           dns_servers: "{{ net_detail[1].dname }}"
+           dns_servers: "{{ net_detail[0].dname }}"
            nic_name: "{{ vm_nicname | default('eth0') }}"
            nic_boot_protocol: static
-           nic_ip_address: "{{ net_detail[1].ip_add}}"
-           nic_gateway: "{{ net_detail[1].gateway }}"
-           nic_netmask: "{{ net_detail[1].subnet }}"
+           nic_ip_address: "{{ item.ip_add}}"
+           nic_gateway: "{{ net_detail[0].gateway }}"
+           nic_netmask: "{{ net_detail[0].subnet }}"
            custom_script: |
              password: "{{ root_password }}"
              chpasswd: { expire: False }
