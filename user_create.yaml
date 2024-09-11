@@ -11,6 +11,6 @@
 #        ca_file: /etc/pki/ovirt-engine/ca.pem
 #        password: "{{ olvm_password }}"
     - name: Create User in internal-authz
-      shell:
-        - ovirt-aaa-jdbc-tool user add play_user --attribute=firstName=playbook --attribute=lastName=user
-        - ovirt-aaa-jdbc-tool user password-reset play_user --password={{ root_password }}
+      shell: ovirt-aaa-jdbc-tool user add play_user --attribute=firstName=playbook --attribute=lastName=user
+    - name: Reset Password
+      shell: ovirt-aaa-jdbc-tool user password-reset play_user --password={{ root_password }}
