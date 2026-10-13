@@ -7,7 +7,7 @@
     - name: Obtain SSO token with using username/password credentials
       ovirt_auth:
         url: https://odscshe-pr.in.oracle.com/ovirt-engine/api
-        username: admin@ovirt
+        username: admin@ovirt@internalsso
         ca_file: /etc/pki/ovirt-engine/ca.pem
         password: "{{ olvm_password }}"
     - name: Create Virtual Network
